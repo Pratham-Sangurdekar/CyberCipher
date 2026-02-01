@@ -44,11 +44,11 @@
 
 ---
 
-## 🌟 Overview
+## Overview
 
 **CyberCipher** is a next-generation payment gateway intelligence platform that combines real-time transaction processing with autonomous AI-powered monitoring and decision-making. Built for modern fintech operations, it provides instant visibility into payment flows while automatically detecting and responding to anomalies across banks, payment methods, and error patterns.
 
-### 🎯 What Problem Does It Solve?
+### What Problem Does It Solve?
 
 In modern payment systems, **every millisecond matters**. Traditional monitoring solutions are reactive—by the time humans notice a problem, thousands of transactions may have already failed. CyberCipher solves this with:
 
@@ -60,9 +60,9 @@ In modern payment systems, **every millisecond matters**. Traditional monitoring
 
 ---
 
-## ✨ What Makes CyberCipher Special
+## What Makes CyberCipher Special
 
-### 🤖 Autonomous AI Agent
+### Autonomous AI Agent
 Not just alerts—**actual intelligence**. The AI agent:
 - Runs continuously in a 30-second observation loop
 - Detects patterns across banks, payment methods, and error codes
@@ -71,20 +71,20 @@ Not just alerts—**actual intelligence**. The AI agent:
 - Tracks outcomes to improve future decisions
 - Visualizes its thought process in a workflow viewer
 
-### 🔄 Real-Time Everything
+### Real-Time Everything
 - **Sub-3-second latency** from payment to dashboard
 - Live WebSocket streams for instant updates
 - Auto-refreshing metrics and KPIs
 - Animated workflow visualization showing agent thinking
 
-### 📊 Advanced Analytics
+### Advanced Analytics
 - **Severity Classification**: LOW/MEDIUM/HIGH based on failure rates
 - **Persistence Tracking**: NEW/RECURRING/ONGOING issue detection
 - **Correlated Failure Patterns**: Bank+method pair analysis
 - **Burst Detection**: Identifies sudden failure spikes
 - **Retry Chain Analysis**: Tracks cascading retry failures
 
-### 🎨 Beautiful Visualizations
+### Beautiful Visualizations
 - n8n-style workflow viewer with cascading animations
 - Real-time charts and graphs
 - Severity badges and persistence indicators
@@ -92,7 +92,7 @@ Not just alerts—**actual intelligence**. The AI agent:
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### One-Command Launch
 
@@ -106,10 +106,10 @@ cd CyberCipher
 
 | Service | URL | Description |
 |---------|-----|-------------|
-| 🏪 **Merchant Portal** | http://localhost:5173 | Generate test payments |
-| 📊 **Ops Dashboard** | http://localhost:5174 | Monitor & analyze |
-| 🔧 **Backend API** | http://localhost:3001 | Core services |
-| 🤖 **AI Agent** | http://localhost:3002 | Intelligence engine |
+|  **Merchant Portal** | http://localhost:5173 | Generate test payments |
+|  **Ops Dashboard** | http://localhost:5174 | Monitor & analyze |
+|  **Backend API** | http://localhost:3001 | Core services |
+|  **AI Agent** | http://localhost:3002 | Intelligence engine |
 
 ### First Transaction in 30 Seconds
 
@@ -125,7 +125,7 @@ curl -X POST http://localhost:3001/payments/simulate \
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ### High-Level Overview
 
@@ -244,9 +244,9 @@ Merchant Portal                 Backend                  AI Agent               
 
 ---
 
-## 🎯 Key Features
+##  Key Features
 
-### 🔴 Real-Time Transaction Processing
+### Real-Time Transaction Processing
 ```javascript
 // Every payment flows through the system instantly
 Payment → Backend (< 10ms) → Storage → Metrics → Dashboard (< 3s)
@@ -257,7 +257,7 @@ Payment → Backend (< 10ms) → Storage → Metrics → Dashboard (< 3s)
 - **Zero data loss**: In-memory store with persistence ready
 - **Auto-aggregation**: KPIs update on every transaction
 
-### 🧠 Intelligent Failure Detection
+###  Intelligent Failure Detection
 
 **3-Tier Severity Classification**:
 - 🟢 **LOW** (5-15% failure): Minor issues, routine monitoring
@@ -265,9 +265,9 @@ Payment → Backend (< 10ms) → Storage → Metrics → Dashboard (< 3s)
 - 🔴 **HIGH** (>30% failure): Critical issue, immediate action required
 
 **Persistence Tracking**:
-- 🆕 **NEW**: Just detected, first occurrence
-- 🔄 **RECURRING**: Seen before, pattern emerging  
-- ⚠️ **ONGOING**: Persistent issue, requires intervention
+-  **NEW**: Just detected, first occurrence
+-  **RECURRING**: Seen before, pattern emerging  
+-  **ONGOING**: Persistent issue, requires intervention
 
 ### 📡 Advanced Failure Simulation
 
@@ -285,7 +285,7 @@ Payment → Backend (< 10ms) → Storage → Metrics → Dashboard (< 3s)
 - **Burst Failures**: 15% chance of sudden spikes
 - **Latency Correlation**: High latency predicts failures
 
-### 🎨 Visual Workflow Explainability
+###  Visual Workflow Explainability
 
 **n8n-Style Pipeline Viewer**:
 - See exactly how the AI agent thinks
@@ -294,7 +294,7 @@ Payment → Backend (< 10ms) → Storage → Metrics → Dashboard (< 3s)
 - Human-readable explanations at each step
 - Updates every 30 seconds with latest analysis
 
-### 📊 Comprehensive Analytics
+###  Comprehensive Analytics
 
 **Bank-Level Insights**:
 - Failure rates by bank (HDFC, ICICI, SBI, Axis, Kotak, PNB)
@@ -417,9 +417,9 @@ The agent maintains:
 
 ---
 
-## 📦 Component Deep Dive
+##  Component Deep Dive
 
-### 🔧 Backend Server (Node.js + Express)
+###  Backend Server (Node.js + Express)
 
 **Core Responsibilities**:
 - Transaction ingestion and validation
@@ -475,7 +475,7 @@ if (Math.random() < 0.15) {
 }
 ```
 
-### 🧠 AI Agent (Python + Flask)
+###  AI Agent (Python + Flask)
 
 **Architecture**:
 ```
@@ -573,19 +573,19 @@ def create_explanation(decision, anomaly):
     template = """
     Detected {severity} severity issue with {bank}.
     
-    📊 Evidence:
+     Evidence:
     - Failure rate: {failure_rate}%
     - Sample size: {total} transactions
     - Duration: {duration} minutes
     - Status: {persistence}
     
-    💡 Recommendation:
+     Recommendation:
     {action}
     
     🎯 Confidence: {confidence}%
     ⚠️ Risk Level: {risk_level}
     
-    📝 Reasoning:
+     Reasoning:
     {detailed_analysis}
     """
     
@@ -620,7 +620,7 @@ class DecisionMemory:
         return self.active_issues[key]['persistence']
 ```
 
-### 🏪 Merchant Portal (React + Vite)
+###  Merchant Portal (React + Vite)
 
 **Features**:
 - One-click payment simulation
@@ -664,7 +664,7 @@ function PaymentSimulator() {
 }
 ```
 
-### 📊 Ops Dashboard (React + Vite)
+###  Ops Dashboard (React + Vite)
 
 **Pages**:
 
@@ -763,7 +763,7 @@ useEffect(() => {
 
 ---
 
-## 💻 Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 
@@ -907,7 +907,7 @@ open http://localhost:5174
 
 ---
 
-## 🧪 Testing & Verification
+##  Testing & Verification
 
 ### Quick Tests
 
@@ -1056,7 +1056,7 @@ ab -n 1000 -c 10 -p payment.json -T application/json \
 
 ---
 
-## 📡 API Reference
+##  API Reference
 
 ### Backend API
 
@@ -1376,7 +1376,7 @@ ws.onmessage = (event) => {
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 ### Backend Configuration
 
@@ -1504,7 +1504,7 @@ VITE_WS_URL=ws://localhost:3001
 VITE_ENV=development
 ```
 
-## 📝 Development
+## Development
 
 ### Project Structure
 ```
@@ -1540,7 +1540,7 @@ CyberCipher/
 2. Update metrics if needed
 3. Document in README
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 **Backend won't start:**
 ```bash
@@ -1564,13 +1564,13 @@ cd agent && pip install -r requirements.txt
 - Verify backend is running
 - Check CORS settings
 
-## 📚 Documentation
+## Documentation
 
 - [Architecture Details](ARCHITECTURE.md)
 - [Backend README](backend/README.md)
 - [Agent README](agent/README.md)
 
-## 🎯 Next Steps
+## Next Steps
 
 1. **Connect frontends to backend** - Replace mock data with API calls
 2. **Add WebSocket support** - Real-time event streaming
@@ -1579,7 +1579,7 @@ cd agent && pip install -r requirements.txt
 5. **Add database** - Persistent storage
 6. **Deploy** - Production deployment guide
 
-## � Documentation
+##  Documentation
 
 - **[QUICKSTART.md](QUICKSTART.md)** - Quick reference guide for system usage
 - **[E2E_TEST_RESULTS.md](E2E_TEST_RESULTS.md)** - Detailed test documentation and results
@@ -1590,7 +1590,7 @@ cd agent && pip install -r requirements.txt
 
 ---
 
-## 🎯 System Status
+##  System Status
 
 ### What's Real (Backend-Driven) ✅
 - ✅ **Overview KPIs**: Total payments, success rate, failure rate, avg latency
@@ -1605,15 +1605,15 @@ cd agent && pip install -r requirements.txt
 - ⚠️ **System Logs**: Static sample events (backend integration planned)
 
 ### What's Next (Optional Future Work) 🔮
-- 🔮 Start agent service: `cd agent && python agent.py`
-- 🔮 Wire agent decisions to ops dashboard
-- 🔮 Add WebSocket real-time streaming
-- 🔮 Replace in-memory store with database
-- 🔮 Add authentication and authorization
+-  Start agent service: `cd agent && python agent.py`
+-  Wire agent decisions to ops dashboard
+-  Add WebSocket real-time streaming
+-  Replace in-memory store with database
+-  Add authentication and authorization
 
 ---
 
-## �📄 License
+## License
 
 MIT
 
