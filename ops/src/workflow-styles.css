@@ -1,0 +1,293 @@
+/* ============================================================================
+   WORKFLOW VIEWER - Cascading Animation Effect
+   ============================================================================ */
+
+.workflow-viewer-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 24px;
+  background: #c91219;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(201, 18, 25, 0.3);
+  transition: all 0.2s;
+  z-index: 999;
+}
+
+.workflow-viewer-btn:hover {
+  background: #8b0d12;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 18, 25, 0.4);
+}
+
+.workflow-viewer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 600px;
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.workflow-viewer-content {
+  padding: 32px;
+}
+
+.workflow-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.workflow-header-content {
+  flex: 1;
+}
+
+.workflow-close-btn {
+  background: transparent;
+  border: 2px solid #d1d5db;
+  color: #6b7280;
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.workflow-close-btn:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.workflow-viewer-header h2 {
+  font-size: 24px;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.workflow-viewer-header p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.workflow-nodes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.workflow-orchestrator {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.workflow-node.orchestrator {
+  background: linear-gradient(135deg, #c91219 0%, #8b0d12 100%);
+  color: white;
+  border: none;
+  max-width: 400px;
+}
+
+.workflow-node.orchestrator .node-header {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.workflow-node.orchestrator .node-title {
+  color: white;
+}
+
+.workflow-node.orchestrator .node-file {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.workflow-node.orchestrator .node-desc {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.workflow-pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.workflow-node-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CASCADING ANIMATION DELAYS - 1.5s between each node */
+.workflow-node-wrapper:nth-child(1) .workflow-node {
+  transition: all 0.6s ease-out 0s;
+}
+
+.workflow-node-wrapper:nth-child(2) .workflow-node {
+  transition: all 0.6s ease-out 1.5s;
+}
+
+.workflow-node-wrapper:nth-child(3) .workflow-node {
+  transition: all 0.6s ease-out 3s;
+}
+
+.workflow-node-wrapper:nth-child(4) .workflow-node {
+  transition: all 0.6s ease-out 4.5s;
+}
+
+.workflow-node-wrapper:nth-child(5) .workflow-node {
+  transition: all 0.6s ease-out 6s;
+}
+
+.workflow-node {
+  width: 100%;
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.workflow-node.running {
+  background: #fef3c7;
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+}
+
+.workflow-node.completed {
+  background: #d1fae5;
+  border-color: #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.workflow-node.warning {
+  background: #fee2e2;
+  border-color: #ef4444;
+}
+
+.workflow-node.idle {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+}
+
+.node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.node-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.node-file {
+  display: inline-block;
+  font-size: 12px;
+  color: #6b7280;
+  background: #e5e7eb;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+}
+
+.status-indicator {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.status-indicator.running {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.node-desc {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.node-summary {
+  font-size: 12px;
+  color: #111827;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 3px solid #c91219;
+  line-height: 1.5;
+}
+
+.node-summary strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #c91219;
+}
+
+.connector-line {
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(180deg, #e5e7eb 0%, transparent 100%);
+  margin: 0 auto;
+}
+
+.workflow-footer {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 2px solid #e5e7eb;
+}
+
+.workflow-footer p {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.workflow-footer strong {
+  color: #111827;
+}

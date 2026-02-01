@@ -1,0 +1,16 @@
+
+🎯 Using failure preset: DEGRADED
+
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║   🚀 SlayPay Backend Server Running                      ║
+║                                                           ║
+║   HTTP API: http://localhost:3001                        ║
+║   WebSocket: ws://localhost:3001                         ║
+║                                                           ║
+║   Ready to accept payment events!                        ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+  
+Generating initial sample data...
+✓ Generated 20 sample transactions

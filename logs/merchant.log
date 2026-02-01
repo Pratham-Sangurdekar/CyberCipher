@@ -1,0 +1,38 @@
+
+> merchant@0.0.0 dev
+> vite
+
+
+  VITE v7.3.1  ready in 111 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+8:30:52 AM [vite] (client) page reload index.html
+8:42:16 AM [vite] (client) hmr update /src/App.jsx
+8:42:17 AM [vite] (client) hmr update /src/App.jsx
+8:42:45 AM [vite] (client) hmr update /src/App.jsx
+8:42:47 AM [vite] (client) page reload index.html
+8:42:47 AM [vite] (client) page reload index.html
+8:42:58 AM [vite] (client) hmr update /src/App.css
+8:44:25 AM [vite] (client) hmr update /src/App.jsx
+8:49:02 AM [vite] (client) hmr update /src/App.jsx
+8:49:11 AM [vite] (client) hmr update /src/App.jsx
+9:07:30 AM [vite] (client) hmr update /src/App.css
+9:09:09 AM [vite] (client) hmr update /src/App.css
+9:11:53 AM [vite] (client) hmr update /src/App.css
+9:11:55 AM [vite] (client) hmr update /src/App.css
+9:12:02 AM [vite] (client) hmr update /src/App.css
+9:12:10 AM [vite] (client) hmr update /src/App.css
+9:12:19 AM [vite] (client) hmr update /src/App.css
+9:12:23 AM [vite] (client) hmr update /src/App.css
+9:12:35 AM [vite] (client) hmr update /src/App.css
+9:12:48 AM [vite] (client) hmr update /src/App.css
+9:14:11 AM [vite] (client) hmr update /src/App.jsx
+9:15:03 AM [vite] (client) hmr update /src/App.jsx
+9:15:08 AM [vite] (client) hmr update /src/App.jsx
+9:15:52 AM [vite] (client) hmr update /src/App.jsx
+9:16:39 AM [vite] (client) hmr update /src/App.jsx
+9:16:45 AM [vite] (client) hmr update /src/App.jsx
+9:16:50 AM [vite] (client) hmr update /src/App.jsx
+9:18:22 AM [vite] (client) hmr update /src/App.jsx
