@@ -1,0 +1,17 @@
+# Render Blueprint for SlayPay
+# This file enables one-click deployment to Render
+
+services:
+  - type: web
+    name: slaypay-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+    autoDeploy: true

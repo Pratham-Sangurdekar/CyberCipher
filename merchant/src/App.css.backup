@@ -1628,140 +1628,8 @@ select:focus {
   }
 }
 
-/* Mobile Responsive Styles - Transition Screen */
+/* Mobile Responsive Styles */
 @media (max-width: 768px) {
-  .transition-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    background: #0a0a0a;
-  }
-
-  .transition-screen .gateway-left {
-    position: relative;
-    width: 85%;
-    max-width: 500px;
-    height: auto;
-    padding: 60px 40px;
-    border-radius: 24px;
-    overflow: visible;
-    display: flex !important;
-    flex-direction: column;
-    gap: 24px;
-    background: linear-gradient(135deg, #c91219 0%, #8b0d12 100%);
-    border-right: none;
-  }
-
-  .transition-border-strip {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #ffeb3b;
-    border-radius: 100%;
-    box-shadow: 
-      0 0 10px 3px #ffeb3b,
-      0 0 20px 6px #ffeb3b,
-      0 0 30px 9px rgba(255, 235, 59, 0.6);
-    animation: travelPerimeter 7s linear forwards;
-    z-index: 10;
-  }
-
-  @keyframes travelPerimeter {
-    0% {
-      top: 0;
-      left: 0;
-    }
-    /* Travel across top edge */
-    25% {
-      top: 0;
-      left: calc(100% - 6px);
-    }
-    /* Travel down right edge */
-    50% {
-      top: calc(100% - 6px);
-      left: calc(100% - 6px);
-    }
-    /* Travel across bottom edge */
-    75% {
-      top: calc(100% - 6px);
-      left: 0;
-    }
-    /* Travel up left edge back to start */
-    100% {
-      top: 0;
-      left: 0;
-    }
-  }
-}
-
-/* Mobile Responsive Styles - Full Screen Content After Transition */
-@media (max-width: 768px) {
-  /* Gateway - Full Screen Layout (No Top Section) */
-  .gateway {
-    flex-direction: column;
-    padding: 0;
-    min-height: 100vh;
-  }
-
-  .gateway-left {
-    display: none;
-  }
-
-  .gateway-right {
-    width: 100%;
-    padding: 32px 20px;
-    background: #faf8f5;
-    min-height: 100vh;
-  }
-
-  /* Contact Header - Mobile */
-  .contact-header {
-    padding: 16px 20px;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  .contact-header h2 {
-    font-size: 20px;
-  }
-
-  .header-actions {
-    width: 100%;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-  }
-
-  .header-actions .icon-btn:first-child {
-    font-size: 12px;
-    padding: 8px 12px;
-    width: auto;
-    height: auto;
-    background: #c91219;
-    color: white;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .header-actions .icon-btn:first-child svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .header-actions .icon-btn:not(:first-child) {
-    width: 32px;
-    height: 32px;
-  }
-
-  /* Welcome Screen */
   .welcome {
     padding: 40px 20px;
     gap: 32px;
@@ -1769,7 +1637,6 @@ select:focus {
 
   .welcome-hero h1 {
     font-size: 36px;
-    line-height: 1.2;
   }
 
   .welcome-hero p {
@@ -1781,50 +1648,22 @@ select:focus {
     gap: 20px;
   }
 
-  .welcome-card h2 {
-    font-size: 20px;
+  .gateway {
+    flex-direction: column;
+    padding: 0;
   }
 
-  /* Form Inputs - Touch-friendly */
-  .field-input {
-    padding: 14px 16px;
-    font-size: 16px;
-    -webkit-appearance: none;
-  }
-
-  .pay-button {
-    padding: 14px 24px;
-    font-size: 16px;
-    min-height: 48px;
-  }
-
-  /* Gateway Header - Mobile */
-  .gateway-header {
-    padding: 0 0 16px 0;
-    margin-bottom: 20px;
+  .gateway-left {
+    border-radius: 0;
+    border-right: none;
     border-bottom: 1px solid #e8dfd3;
+    min-height: 200px;
   }
 
-  .gateway-header h2 {
-    font-size: 18px;
-    margin-bottom: 8px;
+  .gateway-right {
+    padding: 24px 20px;
   }
 
-  .merchant-info {
-    gap: 8px;
-  }
-
-  .merchant-badge {
-    font-size: 9px;
-    padding: 2px 6px;
-  }
-
-  .amount-display {
-    font-size: 32px;
-    margin: 8px 0;
-  }
-
-  /* Payment Methods */
   .payment-methods {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -1832,38 +1671,14 @@ select:focus {
 
   .method-card {
     padding: 14px 16px;
-    min-height: 64px;
   }
 
-  .method-icon {
-    font-size: 28px;
-  }
-
-  .method-label {
-    font-size: 15px;
-  }
-
-  .method-description {
-    font-size: 12px;
-  }
-
-  /* Bank Selection */
   .bank-grid-3col,
   .bank-grid-4col {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 
-  .bank-option {
-    padding: 12px;
-    min-height: 60px;
-  }
-
-  .bank-name {
-    font-size: 13px;
-  }
-
-  /* Card Payment */
   .card-inputs {
     grid-template-columns: 1fr;
   }
@@ -1872,63 +1687,25 @@ select:focus {
     grid-template-columns: 1fr 1fr;
   }
 
-  .card-input {
-    padding: 14px 16px;
-    font-size: 16px;
-    -webkit-appearance: none;
-  }
-
-  /* UPI */
   .upi-tabs {
     flex-wrap: wrap;
-    gap: 8px;
   }
 
   .upi-tab {
-    flex: 1 1 calc(50% - 4px);
+    flex: 1 1 calc(50% - 8px);
     min-width: 120px;
-    padding: 10px 16px;
-    font-size: 13px;
   }
 
-  .upi-input {
-    padding: 14px 16px;
-    font-size: 16px;
-    -webkit-appearance: none;
-  }
-
-  /* QR Code */
   .qr-container {
     max-width: 100%;
     padding: 24px;
   }
 
-  .qr-code {
-    width: 200px;
-    height: 200px;
-  }
-
-  /* Action Buttons */
-  .pay-btn {
-    padding: 14px 24px;
-    font-size: 16px;
-    min-height: 48px;
-  }
-
-  /* Modals */
-  .processing-modal,
-  .success-modal,
-  .failure-modal {
+  .processing-modal {
     padding: 28px 20px;
     max-width: 90%;
-    width: 90%;
   }
 
-  .modal-overlay {
-    padding: 16px;
-  }
-
-  /* Processing */
   .processing-steps {
     gap: 14px;
   }
@@ -1937,12 +1714,6 @@ select:focus {
     font-size: 13px;
   }
 
-  .step-icon {
-    min-width: 32px;
-    height: 32px;
-  }
-
-  /* Success/Failure */
   .success-icon {
     width: 80px;
     height: 80px;
@@ -1952,96 +1723,31 @@ select:focus {
     font-size: 32px;
   }
 
-  .success-title,
-  .failure-title {
-    font-size: 22px;
-  }
-
   .success-details {
     gap: 12px;
   }
 
   .transaction-id {
     font-size: 11px;
-    word-break: break-all;
   }
 
-  .action-btn {
-    padding: 14px 24px;
-    font-size: 15px;
-    min-height: 48px;
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .failure-modal {
+    padding: 28px 20px;
+    max-width: 90%;
   }
 }
 
-/* Small Mobile Devices */
 @media (max-width: 480px) {
-  .gateway-left {
-    padding: 20px 16px;
-  }
-
-  .gateway-right {
-    padding: 28px 16px;
-  }
-
   .welcome-hero h1 {
     font-size: 28px;
-    line-height: 1.2;
-  }
-
-  .welcome-hero p {
-    font-size: 14px;
   }
 
   .welcome-card {
     padding: 24px 16px;
-    width: 100%;
-  }
-
-  .welcome-card h2 {
-    font-size: 18px;
-  }
-
-  .field-input,
-  .card-input,
-  .upi-input {
-    padding: 12px 14px;
-    font-size: 16px;
-  }
-
-  .pay-button,
-  .pay-btn,
-  .action-btn {
-    padding: 12px 20px;
-    font-size: 15px;
-    min-height: 44px;
-  }
-
-  .gateway-header {
-    padding: 0 0 12px 0;
-    margin-bottom: 16px;
-  }
-
-  .gateway-header h2 {
-    font-size: 16px;
-  }
-
-  .merchant-badge {
-    font-size: 8px;
-    padding: 2px 5px;
-  }
-
-  .amount-display {
-    font-size: 28px;
-    margin: 6px 0;
-  }
-
-  .method-card {
-    padding: 12px 14px;
-    min-height: 56px;
-  }
-
-  .method-icon {
-    font-size: 24px;
   }
 
   .method-label {
@@ -2055,114 +1761,183 @@ select:focus {
   .bank-grid-3col,
   .bank-grid-4col {
     grid-template-columns: 1fr;
-    gap: 8px;
   }
 
-  .bank-option {
-    padding: 10px;
-    min-height: 52px;
+  .gateway-header h2 {
+    font-size: 18px;
   }
 
-  .bank-logo {
-    font-size: 20px;
+  .merchant-badge {
+    font-size: 11px;
+    padding: 3px 8px;
   }
 
-  .bank-name {
-    font-size: 12px;
-  }
-
-  .upi-tabs {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .upi-tab {
-    flex: 1 1 100%;
-    width: 100%;
-    padding: 10px 14px;
-    font-size: 13px;
-  }
-
-  .qr-code {
-    width: 180px;
-    height: 180px;
-  }
-
-  .qr-timer {
-    font-size: 12px;
-  }
-
-  .processing-modal,
-  .success-modal,
-  .failure-modal {
-    padding: 24px 16px;
-    max-width: 95%;
-    width: 95%;
+  .amount-display {
+    font-size: 32px;
   }
 
   .processing-title {
     font-size: 20px;
   }
 
-  .processing-warning {
-    font-size: 12px;
+  .success-title {
+    font-size: 24px;
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .welcome {
+    padding: 40px 20px;
+    gap: 32px;
+  }
+
+  .welcome-hero h1 {
+    font-size: 36px;
+  }
+
+  .welcome-hero p {
+    font-size: 16px;
+  }
+
+  .welcome-card {
+    padding: 28px 20px;
+    gap: 20px;
+  }
+
+  .gateway {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .gateway-left {
+    border-radius: 0;
+    border-right: none;
+    border-bottom: 1px solid #e8dfd3;
+    min-height: 200px;
+  }
+
+  .gateway-right {
+    padding: 24px 20px;
+  }
+
+  .payment-methods {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .method-card {
+    padding: 14px 16px;
+  }
+
+  .bank-grid-3col,
+  .bank-grid-4col {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .card-inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .cvv-group {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .upi-tabs {
+    flex-wrap: wrap;
+  }
+
+  .upi-tab {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 120px;
+  }
+
+  .qr-container {
+    max-width: 100%;
+    padding: 24px;
+  }
+
+  .processing-modal {
+    padding: 28px 20px;
+    max-width: 90%;
+  }
+
+  .processing-steps {
+    gap: 14px;
   }
 
   .step-item {
-    font-size: 12px;
+    font-size: 13px;
   }
 
-  .step-icon {
-    min-width: 28px;
-    height: 28px;
-  }
-
-  .success-title,
-  .failure-title {
-    font-size: 20px;
+  .success-icon {
+    width: 80px;
+    height: 80px;
   }
 
   .success-amount {
+    font-size: 32px;
+  }
+
+  .success-details {
+    gap: 12px;
+  }
+
+  .transaction-id {
+    font-size: 11px;
+  }
+
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .failure-modal {
+    padding: 28px 20px;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-hero h1 {
     font-size: 28px;
   }
 
-  .merchant-badge {
-    font-size: 10px;
-    padding: 2px 6px;
+  .welcome-card {
+    padding: 24px 16px;
   }
 
-  .detail-row {
-    font-size: 13px;
+  .method-label {
+    font-size: 14px;
   }
 
-  .detail-label {
+  .method-description {
     font-size: 11px;
   }
-}
 
-/* Ops Dashboard Link */
-.ops-link {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  text-align: center;
-}
+  .bank-grid-3col,
+  .bank-grid-4col {
+    grid-template-columns: 1fr;
+  }
 
-.ops-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-}
+  .gateway-header h2 {
+    font-size: 18px;
+  }
 
-@media (max-width: 768px) {
-  .ops-link {
-    font-size: 13px;
-    padding: 10px 20px;
+  .merchant-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .amount-display {
+    font-size: 32px;
+  }
+
+  .processing-title {
+    font-size: 20px;
+  }
+
+  .success-title {
+    font-size: 24px;
   }
 }

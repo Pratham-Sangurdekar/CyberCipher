@@ -9,10 +9,6 @@ const wss = new WebSocketServer({ server });
 
 const PORT = 3001;
 
-// ============================================================================
-// FAILURE SIMULATION PRESETS
-// ============================================================================
-
 const FAILURE_PRESETS = {
   NORMAL: {
     name: 'NORMAL',
@@ -76,15 +72,12 @@ const FAILURE_PRESETS = {
 const ACTIVE_PRESET = process.env.FAILURE_PRESET || 'DEGRADED';
 const currentPreset = FAILURE_PRESETS[ACTIVE_PRESET] || FAILURE_PRESETS.DEGRADED;
 
-console.log(`\n🎯 Using failure preset: ${currentPreset.name}`);
+console.log(`\n Using failure preset: ${currentPreset.name}`);
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// ============================================================================
-// IN-MEMORY DATA STORE
-// ============================================================================
 
 const MAX_EVENTS = 1000;
 const events = [];
@@ -97,10 +90,6 @@ const metrics = {
   methodStats: {},
   errorCodes: {}
 };
-
-// ============================================================================
-// HELPER FUNCTIONS
-// ============================================================================
 
 function addEvent(event) {
   // Add timestamp if not present

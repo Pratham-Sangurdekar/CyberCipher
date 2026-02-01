@@ -17,24 +17,16 @@ Generating initial sample data...
 
 🎲 Generating 1000 payment events using DEGRADED preset...
 ✓ Generated 1000 events
-  Success: 559 (56%)
-  Failure: 180 (18%)
-  Retried: 178 (18%)
-  Cancelled: 54 (5%)
-  Bounced: 29 (3%)
-
-🎲 Generating 1000 payment events using DEGRADED preset...
-✓ Generated 1000 events
-  Success: 552 (55%)
-  Failure: 158 (16%)
-  Retried: 198 (20%)
+  Success: 576 (58%)
+  Failure: 161 (16%)
+  Retried: 163 (16%)
   Cancelled: 59 (6%)
-  Bounced: 33 (3%)
+  Bounced: 41 (4%)
 
 🎲 Generating 1000 payment events using DEGRADED preset...
 ✓ Generated 1000 events
-  Success: 564 (56%)
-  Failure: 170 (17%)
-  Retried: 174 (17%)
-  Cancelled: 56 (6%)
-  Bounced: 36 (4%)
+  Success: 551 (55%)
+  Failure: 152 (15%)
+  Retried: 212 (21%)
+  Cancelled: 58 (6%)
+  Bounced: 27 (3%)

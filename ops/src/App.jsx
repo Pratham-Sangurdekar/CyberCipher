@@ -24,6 +24,7 @@ function App() {
   // Workflow viewer state
   const [workflowViewerOpen, setWorkflowViewerOpen] = useState(false)
   const [workflowState, setWorkflowState] = useState(null)
+  const [workflowAnimationStep, setWorkflowAnimationStep] = useState(0)
   
   // Historical data for mini-charts (last 20 data points)
   const [historyData, setHistoryData] = useState({
@@ -162,6 +163,27 @@ function App() {
     }, 3000)
     return () => clearInterval(interval)
   }, [streamPaused, workflowViewerOpen])
+  
+  // Workflow animation effect - turn boxes green one by one
+  useEffect(() => {
+    if (workflowViewerOpen) {
+      setWorkflowAnimationStep(0)
+      
+      const timers = [
+        setTimeout(() => setWorkflowAnimationStep(1), 0),
+        setTimeout(() => setWorkflowAnimationStep(2), 2000),
+        setTimeout(() => setWorkflowAnimationStep(3), 4000),
+        setTimeout(() => setWorkflowAnimationStep(4), 6000),
+        setTimeout(() => setWorkflowAnimationStep(5), 8000)
+      ]
+      
+      return () => {
+        timers.forEach(timer => clearTimeout(timer))
+      }
+    } else {
+      setWorkflowAnimationStep(0)
+    }
+  }, [workflowViewerOpen])
   
   // Update historical data when metrics change
   useEffect(() => {
@@ -1228,17 +1250,14 @@ function App() {
               <div className="workflow-pipeline">
                 {/* Observe Node */}
                 <div className="workflow-node-wrapper">
-                  <div className={`workflow-node ${workflowState?.observe?.status || 'idle'}`}>
+                  <div className={`workflow-node ${workflowAnimationStep >= 1 ? 'completed' : 'idle'}`}>
                     <div className="node-header">
                       <div>
                         <span className="node-title">1. Observe</span>
                         <span className="node-file">observe.py</span>
                       </div>
-                      <span className={`status-indicator ${workflowState?.observe?.status || 'idle'}`}>
-                        {workflowState?.observe?.status === 'running' && '⚙️'}
-                        {workflowState?.observe?.status === 'completed' && '✓'}
-                        {workflowState?.observe?.status === 'idle' && '○'}
-                        {workflowState?.observe?.status === 'warning' && '⚠️'}
+                      <span className={`status-indicator ${workflowAnimationStep >= 1 ? 'completed' : 'idle'}`}>
+                        {workflowAnimationStep >= 1 ? '✓' : '○'}
                       </span>
                     </div>
                     <div className="node-desc">
@@ -1250,22 +1269,19 @@ function App() {
                       </div>
                     )}
                   </div>
-                  <div className="connector-line"></div>
+                  <div className={`connector-line ${workflowAnimationStep >= 2 ? 'active' : ''}`}></div>
                 </div>
 
                 {/* Reason Node */}
                 <div className="workflow-node-wrapper">
-                  <div className={`workflow-node ${workflowState?.reason?.status || 'idle'}`}>
+                  <div className={`workflow-node ${workflowAnimationStep >= 2 ? 'completed' : 'idle'}`}>
                     <div className="node-header">
                       <div>
                         <span className="node-title">2. Reason</span>
                         <span className="node-file">reason.py</span>
                       </div>
-                      <span className={`status-indicator ${workflowState?.reason?.status || 'idle'}`}>
-                        {workflowState?.reason?.status === 'running' && '⚙️'}
-                        {workflowState?.reason?.status === 'completed' && '✓'}
-                        {workflowState?.reason?.status === 'idle' && '○'}
-                        {workflowState?.reason?.status === 'warning' && '⚠️'}
+                      <span className={`status-indicator ${workflowAnimationStep >= 2 ? 'completed' : 'idle'}`}>
+                        {workflowAnimationStep >= 2 ? '✓' : '○'}
                       </span>
                     </div>
                     <div className="node-desc">
@@ -1277,22 +1293,19 @@ function App() {
                       </div>
                     )}
                   </div>
-                  <div className="connector-line"></div>
+                  <div className={`connector-line ${workflowAnimationStep >= 3 ? 'active' : ''}`}></div>
                 </div>
 
                 {/* Decide Node */}
                 <div className="workflow-node-wrapper">
-                  <div className={`workflow-node ${workflowState?.decide?.status || 'idle'}`}>
+                  <div className={`workflow-node ${workflowAnimationStep >= 3 ? 'completed' : 'idle'}`}>
                     <div className="node-header">
                       <div>
                         <span className="node-title">3. Decide</span>
                         <span className="node-file">decide.py</span>
                       </div>
-                      <span className={`status-indicator ${workflowState?.decide?.status || 'idle'}`}>
-                        {workflowState?.decide?.status === 'running' && '⚙️'}
-                        {workflowState?.decide?.status === 'completed' && '✓'}
-                        {workflowState?.decide?.status === 'idle' && '○'}
-                        {workflowState?.decide?.status === 'warning' && '⚠️'}
+                      <span className={`status-indicator ${workflowAnimationStep >= 3 ? 'completed' : 'idle'}`}>
+                        {workflowAnimationStep >= 3 ? '✓' : '○'}
                       </span>
                     </div>
                     <div className="node-desc">
@@ -1304,22 +1317,19 @@ function App() {
                       </div>
                     )}
                   </div>
-                  <div className="connector-line"></div>
+                  <div className={`connector-line ${workflowAnimationStep >= 4 ? 'active' : ''}`}></div>
                 </div>
 
                 {/* Explain Node */}
                 <div className="workflow-node-wrapper">
-                  <div className={`workflow-node ${workflowState?.explain?.status || 'idle'}`}>
+                  <div className={`workflow-node ${workflowAnimationStep >= 4 ? 'completed' : 'idle'}`}>
                     <div className="node-header">
                       <div>
                         <span className="node-title">4. Explain</span>
                         <span className="node-file">explain.py</span>
                       </div>
-                      <span className={`status-indicator ${workflowState?.explain?.status || 'idle'}`}>
-                        {workflowState?.explain?.status === 'running' && '⚙️'}
-                        {workflowState?.explain?.status === 'completed' && '✓'}
-                        {workflowState?.explain?.status === 'idle' && '○'}
-                        {workflowState?.explain?.status === 'warning' && '⚠️'}
+                      <span className={`status-indicator ${workflowAnimationStep >= 4 ? 'completed' : 'idle'}`}>
+                        {workflowAnimationStep >= 4 ? '✓' : '○'}
                       </span>
                     </div>
                     <div className="node-desc">
@@ -1331,22 +1341,19 @@ function App() {
                       </div>
                     )}
                   </div>
-                  <div className="connector-line"></div>
+                  <div className={`connector-line ${workflowAnimationStep >= 5 ? 'active' : ''}`}></div>
                 </div>
 
                 {/* Memory Node */}
                 <div className="workflow-node-wrapper">
-                  <div className={`workflow-node ${workflowState?.memory?.status || 'idle'}`}>
+                  <div className={`workflow-node ${workflowAnimationStep >= 5 ? 'completed' : 'idle'}`}>
                     <div className="node-header">
                       <div>
                         <span className="node-title">5. Memory / Learn</span>
                         <span className="node-file">memory.py</span>
                       </div>
-                      <span className={`status-indicator ${workflowState?.memory?.status || 'idle'}`}>
-                        {workflowState?.memory?.status === 'running' && '⚙️'}
-                        {workflowState?.memory?.status === 'completed' && '✓'}
-                        {workflowState?.memory?.status === 'idle' && '○'}
-                        {workflowState?.memory?.status === 'warning' && '⚠️'}
+                      <span className={`status-indicator ${workflowAnimationStep >= 5 ? 'completed' : 'idle'}`}>
+                        {workflowAnimationStep >= 5 ? '✓' : '○'}
                       </span>
                     </div>
                     <div className="node-desc">

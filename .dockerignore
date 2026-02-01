@@ -1,0 +1,46 @@
+# Node modules (will be installed in container)
+node_modules/
+**/node_modules/
+
+# Python virtual environment (will be created in container)
+venv/
+**/venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+logs/
+*.log
+
+# Git
+.git/
+.gitignore
+.github/
+
+# OS files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Frontend build artifacts (not needed in backend container)
+merchant/dist/
+merchant/node_modules/
+ops/dist/
+ops/node_modules/
+
+# Development files
+test.sh
+.pids
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Temporary files
+*.tmp
+*.temp

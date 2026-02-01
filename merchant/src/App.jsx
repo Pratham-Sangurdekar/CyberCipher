@@ -85,6 +85,7 @@ function App() {
   const [selectedBank, setSelectedBank] = useState('SBI')
   const [selectedPayLaterOption, setSelectedPayLaterOption] = useState('Simpl')
   const [step, setStep] = useState('setup')
+  const [showTransition, setShowTransition] = useState(false)
   const [merchantName, setMerchantName] = useState('SlayPay Merchant')
   const [amount, setAmount] = useState(6767.67)
   const [contact, setContact] = useState({
@@ -195,12 +196,56 @@ function App() {
   }
 
   const handleStart = () => {
-    setStep('contact')
+    if (window.innerWidth <= 768) {
+      setShowTransition(true)
+      setTimeout(() => {
+        setShowTransition(false)
+        setStep('contact')
+      }, 7000)
+    } else {
+      setStep('contact')
+    }
   }
 
   return (
     <div className="app">
-      {step === 'setup' ? (
+      {showTransition ? (
+        <div className="transition-screen">
+          <aside className="gateway-left">
+            <div className="merchant-header">
+              <div className="merchant-avatar">
+                {merchantName ? merchantName[0].toUpperCase() : 'M'}
+              </div>
+              <h2 className="merchant-name">{merchantName || 'Merchant'}</h2>
+            </div>
+
+            <div className="trusted-badge">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 0L10.5 5.5L16 6.5L12 10.5L13 16L8 13L3 16L4 10.5L0 6.5L5.5 5.5L8 0Z" fill="currentColor"/>
+              </svg>
+              SlayPay Trusted Business
+            </div>
+
+            <div className="amount-card">
+              <span className="amount-label">Total Amount</span>
+              <div className="amount-value">₹{amount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+            </div>
+
+            <div className="sidebar-decoration">
+              <div className="decoration-shape"></div>
+            </div>
+
+            <div className="secured">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M8 0L10 6L16 8L10 10L8 16L6 10L0 8L6 6L8 0Z" fill="#ffd700"/>
+              </svg>
+              Secured by <strong>SlayPay</strong>
+            </div>
+
+            <div className="transition-border-strip"></div>
+          </aside>
+        </div>
+      ) : step === 'setup' ? (
         <div className="welcome">
           <div className="welcome-hero">
             <h1>
@@ -240,6 +285,14 @@ function App() {
               </svg>
               Pay ₹{amount.toLocaleString('en-IN')}
             </button>
+            <a 
+              href="https://slayops.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="ops-link"
+            >
+              Click here to see the agent at work
+            </a>
           </div>
         </div>
       ) : step === 'contact' ? (
@@ -382,7 +435,17 @@ function App() {
               />
             </label>
 
-            <button className="proceed-btn" onClick={() => setStep('methods')}>
+            <button className="proceed-btn" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setShowTransition(true)
+                setTimeout(() => {
+                  setShowTransition(false)
+                  setStep('methods')
+                }, 7000)
+              } else {
+                setStep('methods')
+              }
+            }}>
               Proceed
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="9 18 15 12 9 6"/>
