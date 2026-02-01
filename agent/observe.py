@@ -7,7 +7,7 @@ import requests
 from datetime import datetime
 from typing import List, Dict
 
-BACKEND_URL = "http://localhost:3001"
+BACKEND_URL = "https://cybercipher.onrender.com"
 
 def fetch_recent_events(limit: int = 100) -> List[Dict]:
     """Fetch recent payment events from backend"""

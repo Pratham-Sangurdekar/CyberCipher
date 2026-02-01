@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import './workflow-styles.css'
 
-const BACKEND_URL = 'http://localhost:3001'
-const AGENT_URL = 'http://localhost:3002'
+const BACKEND_URL = 'https://cybercipher.onrender.com'
+const AGENT_URL = 'https://cybercipher.onrender.com'
 
 function App() {
   const [activeNav, setActiveNav] = useState('overview')

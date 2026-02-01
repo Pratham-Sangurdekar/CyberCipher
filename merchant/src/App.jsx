@@ -115,7 +115,7 @@ function App() {
     setTrafficSummary(null)
     
     try {
-      const response = await fetch('http://localhost:3001/payments/simulate', {
+      const response = await fetch('https://cybercipher.onrender.com/payments/simulate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ count: 1000 })
@@ -178,7 +178,7 @@ function App() {
     
     // Send to backend
     try {
-      await fetch('http://localhost:3001/payments/event', {
+      await fetch('https://cybercipher.onrender.com/payments/event', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(paymentEvent)
