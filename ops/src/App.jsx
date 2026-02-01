@@ -455,12 +455,15 @@ function App() {
                         </defs>
                         {(() => {
                           const data = historyData.totalPayments
-                          const max = Math.max(...data, 1)
-                          const min = Math.min(...data, 0)
+                          const dataMax = Math.max(...data, 1)
+                          const dataMin = Math.min(...data, 0)
+                          const padding = (dataMax - dataMin) * 0.1 || dataMax * 0.1 || 1
+                          const max = dataMax + padding
+                          const min = Math.max(0, dataMin - padding)
                           const range = max - min || 1
                           const points = data.map((value, index) => {
                             const x = (index / (data.length - 1 || 1)) * 100
-                            const y = 40 - ((value - min) / range) * 35
+                            const y = 5 + (1 - (value - min) / range) * 30
                             return `${x},${y}`
                           }).join(' ')
                           const areaPoints = `0,40 ${points} 100,40`
@@ -495,12 +498,15 @@ function App() {
                         </defs>
                         {(() => {
                           const data = historyData.successRate
-                          const max = 100
-                          const min = Math.min(...data, 0)
+                          const dataMax = Math.max(...data, 90)
+                          const dataMin = Math.min(...data, 0)
+                          const padding = (dataMax - dataMin) * 0.1 || 5
+                          const max = Math.min(100, dataMax + padding)
+                          const min = Math.max(0, dataMin - padding)
                           const range = max - min || 1
                           const points = data.map((value, index) => {
                             const x = (index / (data.length - 1 || 1)) * 100
-                            const y = 40 - ((value - min) / range) * 35
+                            const y = 5 + (1 - (value - min) / range) * 30
                             return `${x},${y}`
                           }).join(' ')
                           const areaPoints = `0,40 ${points} 100,40`
@@ -536,12 +542,15 @@ function App() {
                         </defs>
                         {(() => {
                           const data = historyData.failureRate
-                          const max = Math.max(...data, 10)
+                          const dataMax = Math.max(...data, 5)
+                          const dataMin = Math.min(...data, 0)
+                          const padding = (dataMax - dataMin) * 0.1 || dataMax * 0.1 || 0.5
+                          const max = dataMax + padding
                           const min = 0
                           const range = max - min || 1
                           const points = data.map((value, index) => {
                             const x = (index / (data.length - 1 || 1)) * 100
-                            const y = 40 - ((value - min) / range) * 35
+                            const y = 5 + (1 - (value - min) / range) * 30
                             return `${x},${y}`
                           }).join(' ')
                           const areaPoints = `0,40 ${points} 100,40`
@@ -576,12 +585,15 @@ function App() {
                         </defs>
                         {(() => {
                           const data = historyData.avgLatency
-                          const max = Math.max(...data, 500)
-                          const min = Math.min(...data, 0)
+                          const dataMax = Math.max(...data, 100)
+                          const dataMin = Math.min(...data, 0)
+                          const padding = (dataMax - dataMin) * 0.1 || dataMax * 0.1 || 10
+                          const max = dataMax + padding
+                          const min = Math.max(0, dataMin - padding)
                           const range = max - min || 1
                           const points = data.map((value, index) => {
                             const x = (index / (data.length - 1 || 1)) * 100
-                            const y = 40 - ((value - min) / range) * 35
+                            const y = 5 + (1 - (value - min) / range) * 30
                             return `${x},${y}`
                           }).join(' ')
                           const areaPoints = `0,40 ${points} 100,40`
