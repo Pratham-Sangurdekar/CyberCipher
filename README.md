@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔐 CyberCipher
+# 🔐 SlayPay Agent
 
 ### AI-Powered Payment Gateway Intelligence Platform
 
