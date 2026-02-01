@@ -25,6 +25,15 @@ function App() {
   const [workflowViewerOpen, setWorkflowViewerOpen] = useState(false)
   const [workflowState, setWorkflowState] = useState(null)
   
+  // Historical data for mini-charts (last 20 data points)
+  const [historyData, setHistoryData] = useState({
+    totalPayments: [],
+    successRate: [],
+    failureRate: [],
+    avgLatency: [],
+    activeIncidents: []
+  })
+  
   // Incidents state (keeping this for now as it's UI-only)
   const [incidents, setIncidents] = useState([
     {
@@ -153,6 +162,19 @@ function App() {
     }, 3000)
     return () => clearInterval(interval)
   }, [streamPaused, workflowViewerOpen])
+  
+  // Update historical data when metrics change
+  useEffect(() => {
+    if (metrics) {
+      setHistoryData(prev => ({
+        totalPayments: [...prev.totalPayments, metrics.totalTransactions].slice(-20),
+        successRate: [...prev.successRate, parseFloat(metrics.successRate)].slice(-20),
+        failureRate: [...prev.failureRate, parseFloat(metrics.failureRate)].slice(-20),
+        avgLatency: [...prev.avgLatency, parseInt(metrics.avgLatency)].slice(-20),
+        activeIncidents: [...prev.activeIncidents, 2].slice(-20)
+      }))
+    }
+  }, [metrics])
 
   // Compute KPIs from real metrics
   const getKPIs = () => {
@@ -247,6 +269,33 @@ function App() {
     setIncidents(incidents.map(inc => 
       inc.id === id ? { ...inc, expanded: !inc.expanded } : inc
     ))
+  }
+  
+  // Render mini sparkline chart
+  const renderMiniChart = (data, color = '#10b981') => {
+    if (!data || data.length === 0) return null
+    
+    const max = Math.max(...data, 1)
+    const min = Math.min(...data, 0)
+    const range = max - min || 1
+    
+    const points = data.map((value, index) => {
+      const x = (index / (data.length - 1 || 1)) * 100
+      const y = 100 - ((value - min) / range) * 100
+      return `${x},${y}`
+    }).join(' ')
+    
+    return (
+      <svg className="mini-chart" viewBox="0 0 100 30" preserveAspectRatio="none">
+        <polyline
+          points={points}
+          fill="none"
+          stroke={color}
+          strokeWidth="2"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+    )
   }
 
   return (
@@ -384,6 +433,174 @@ function App() {
                 </div>
               ))}
             </div>
+            
+            {/* SECTION 2: Metric Trend Charts (2x2 Grid) */}
+            <div className="metric-charts-section">
+              <h3 className="section-title">Real-Time Metric Trends</h3>
+              <div className="metric-charts-grid">
+                {/* Total Payments Chart */}
+                <div className="metric-chart-card">
+                  <div className="metric-chart-header">
+                    <h4>Total Payments</h4>
+                    <span className="metric-current">{kpis[0].value}</span>
+                  </div>
+                  <div className="metric-chart-body">
+                    {historyData.totalPayments.length > 0 ? (
+                      <svg className="metric-chart" viewBox="0 0 100 40" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="gradient-payments" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
+                            <stop offset="100%" stopColor="#10b981" stopOpacity="0.05" />
+                          </linearGradient>
+                        </defs>
+                        {(() => {
+                          const data = historyData.totalPayments
+                          const max = Math.max(...data, 1)
+                          const min = Math.min(...data, 0)
+                          const range = max - min || 1
+                          const points = data.map((value, index) => {
+                            const x = (index / (data.length - 1 || 1)) * 100
+                            const y = 40 - ((value - min) / range) * 35
+                            return `${x},${y}`
+                          }).join(' ')
+                          const areaPoints = `0,40 ${points} 100,40`
+                          return (
+                            <>
+                              <polygon points={areaPoints} fill="url(#gradient-payments)" />
+                              <polyline points={points} fill="none" stroke="#10b981" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+                            </>
+                          )
+                        })()}
+                      </svg>
+                    ) : (
+                      <div className="metric-chart-empty">Collecting data...</div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Success Rate Chart */}
+                <div className="metric-chart-card">
+                  <div className="metric-chart-header">
+                    <h4>Success Rate</h4>
+                    <span className="metric-current">{kpis[1].value}</span>
+                  </div>
+                  <div className="metric-chart-body">
+                    {historyData.successRate.length > 0 ? (
+                      <svg className="metric-chart" viewBox="0 0 100 40" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="gradient-success" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
+                            <stop offset="100%" stopColor="#10b981" stopOpacity="0.05" />
+                          </linearGradient>
+                        </defs>
+                        {(() => {
+                          const data = historyData.successRate
+                          const max = 100
+                          const min = Math.min(...data, 0)
+                          const range = max - min || 1
+                          const points = data.map((value, index) => {
+                            const x = (index / (data.length - 1 || 1)) * 100
+                            const y = 40 - ((value - min) / range) * 35
+                            return `${x},${y}`
+                          }).join(' ')
+                          const areaPoints = `0,40 ${points} 100,40`
+                          const color = kpis[1].status === 'good' ? '#10b981' : kpis[1].status === 'warning' ? '#f59e0b' : '#ff0040'
+                          return (
+                            <>
+                              <polygon points={areaPoints} fill={`url(#gradient-success)`} />
+                              <polyline points={points} fill="none" stroke={color} strokeWidth="2" vectorEffect="non-scaling-stroke" />
+                            </>
+                          )
+                        })()}
+                      </svg>
+                    ) : (
+                      <div className="metric-chart-empty">Collecting data...</div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Failure Rate Chart */}
+                <div className="metric-chart-card">
+                  <div className="metric-chart-header">
+                    <h4>Failure Rate</h4>
+                    <span className="metric-current">{kpis[2].value}</span>
+                  </div>
+                  <div className="metric-chart-body">
+                    {historyData.failureRate.length > 0 ? (
+                      <svg className="metric-chart" viewBox="0 0 100 40" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="gradient-failure" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#ff0040" stopOpacity="0.3" />
+                            <stop offset="100%" stopColor="#ff0040" stopOpacity="0.05" />
+                          </linearGradient>
+                        </defs>
+                        {(() => {
+                          const data = historyData.failureRate
+                          const max = Math.max(...data, 10)
+                          const min = 0
+                          const range = max - min || 1
+                          const points = data.map((value, index) => {
+                            const x = (index / (data.length - 1 || 1)) * 100
+                            const y = 40 - ((value - min) / range) * 35
+                            return `${x},${y}`
+                          }).join(' ')
+                          const areaPoints = `0,40 ${points} 100,40`
+                          return (
+                            <>
+                              <polygon points={areaPoints} fill="url(#gradient-failure)" />
+                              <polyline points={points} fill="none" stroke="#ff0040" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+                            </>
+                          )
+                        })()}
+                      </svg>
+                    ) : (
+                      <div className="metric-chart-empty">Collecting data...</div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Avg Latency Chart */}
+                <div className="metric-chart-card">
+                  <div className="metric-chart-header">
+                    <h4>Average Latency</h4>
+                    <span className="metric-current">{kpis[3].value}</span>
+                  </div>
+                  <div className="metric-chart-body">
+                    {historyData.avgLatency.length > 0 ? (
+                      <svg className="metric-chart" viewBox="0 0 100 40" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="gradient-latency" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.3" />
+                            <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.05" />
+                          </linearGradient>
+                        </defs>
+                        {(() => {
+                          const data = historyData.avgLatency
+                          const max = Math.max(...data, 500)
+                          const min = Math.min(...data, 0)
+                          const range = max - min || 1
+                          const points = data.map((value, index) => {
+                            const x = (index / (data.length - 1 || 1)) * 100
+                            const y = 40 - ((value - min) / range) * 35
+                            return `${x},${y}`
+                          }).join(' ')
+                          const areaPoints = `0,40 ${points} 100,40`
+                          const color = kpis[3].status === 'good' ? '#10b981' : kpis[3].status === 'warning' ? '#f59e0b' : '#ff0040'
+                          return (
+                            <>
+                              <polygon points={areaPoints} fill="url(#gradient-latency)" />
+                              <polyline points={points} fill="none" stroke={color} strokeWidth="2" vectorEffect="non-scaling-stroke" />
+                            </>
+                          )
+                        })()}
+                      </svg>
+                    ) : (
+                      <div className="metric-chart-empty">Collecting data...</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </>
         )}
 
@@ -422,7 +639,7 @@ function App() {
                           <div className="bar-track">
                             <div 
                               className="bar-fill failure" 
-                              style={{ width: `${Math.min((item.value / 10) * 100, 100)}%` }}
+                              style={{ width: `${Math.min(item.value, 100)}%` }}
                             ></div>
                           </div>
                           <span className="bar-value">{item.value}%</span>
@@ -444,7 +661,7 @@ function App() {
                           <div className="bar-track">
                             <div 
                               className="bar-fill failure" 
-                              style={{ width: `${Math.min((item.value / 10) * 100, 100)}%` }}
+                              style={{ width: `${Math.min(item.value, 100)}%` }}
                             ></div>
                           </div>
                           <span className="bar-value">{item.value}%</span>
@@ -466,7 +683,7 @@ function App() {
                           <div className="bar-track">
                             <div 
                               className="bar-fill latency" 
-                              style={{ width: `${Math.min((item.value / 500) * 100, 100)}%` }}
+                              style={{ width: `${Math.min((item.value / 1000) * 100, 100)}%` }}
                             ></div>
                           </div>
                           <span className="bar-value">{item.value}ms</span>
@@ -488,7 +705,7 @@ function App() {
                           <div className="bar-track">
                             <div 
                               className="bar-fill latency" 
-                              style={{ width: `${Math.min((item.value / 500) * 100, 100)}%` }}
+                              style={{ width: `${Math.min((item.value / 1000) * 100, 100)}%` }}
                             ></div>
                           </div>
                           <span className="bar-value">{item.value}ms</span>
